@@ -1,4 +1,4 @@
-// lib/features/metaSlice.ts
+// /lib/features/metaSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface MetaState {
@@ -17,7 +17,7 @@ const metaSlice = createSlice({
   name: 'meta',
   initialState,
   reducers: {
-    setMeta: (state, action: PayloadAction<MetaState>) => {
+    setMeta(state, action: PayloadAction<MetaState>) {
       state.title = action.payload.title;
       state.description = action.payload.description;
       state.image = action.payload.image;

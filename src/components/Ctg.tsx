@@ -1,7 +1,10 @@
+// /components/Ctg.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { setMeta } from '@/lib/features/metaSlice';
+import { useDispatch } from 'react-redux';
 
 interface BlogImage {
   details: string;
@@ -18,7 +21,8 @@ interface CtgProps {
   id: string;
 }
 
-const Ctg: React.FC<CtgProps> = ({ id }) => {
+const Ctg = ({ id }: CtgProps) => {
+  const dispatch = useDispatch();
   const [data, setData] = useState<NewsData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
@@ -26,9 +30,14 @@ const Ctg: React.FC<CtgProps> = ({ id }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiUrl}news_details/1/80`);
+        const response = await axios.get(`${apiUrl}news_details/1/${id}`);
         if (response.data.status) {
           setData(response.data.data);
+          dispatch(setMeta({
+            title: response.data.data.title,
+            description: '',
+            image: '',
+          }));
         }
       } catch (err) {
         console.error('Error fetching data:', err);
