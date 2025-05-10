@@ -18,7 +18,7 @@ export default function MetaHydrator({ meta }: MetaProps) {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(setMeta(meta)); // Store only metadata in Redux
+    dispatch(setMeta(meta)); // Store metadata in Redux
   }, [meta, dispatch]);
 
   return null; // No UI rendered here

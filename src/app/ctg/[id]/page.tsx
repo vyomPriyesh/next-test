@@ -1,32 +1,30 @@
-// app/ctg/[id]/page.tsx
+// app/ctg/page.tsx
 import MetaHydrator from '@/components/MetaHydrator';
+import { useSelector } from 'react-redux';
+import { AppState } from '@/lib/store';
+import Head from 'next/head';
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
-  const meta = await getMetaFromServer(params.id); // Fetch metadata based on params.id
+// Simulate fetching metadata (replace with real API call if needed)
+async function getMetaFromServer() {
+  // Replace with actual API call or fetching logic
   return {
-    title: meta.title,
-    description: meta.description,
-    openGraph: {
-      images: [meta.image],
-    },
+    title: 'Category Title',
+    description: 'Description for this category',
+    image: 'https://example.com/images/category.jpg',
   };
 }
 
-async function getMetaFromServer(id: string) {
-  // Replace with real API call
-  return {
-    title: `Category ${id} Title`,
-    description: `Description for Category ${id}`,
-    image: `https://example.com/images/${id}.jpg`,
-  };
-}
-
-export default async function Page({ params }: { params: { id: string } }) {
-  const meta = await getMetaFromServer(params.id);
+export default async function Page() {
+  const meta = await getMetaFromServer();
 
   return (
     <>
       <MetaHydrator meta={meta} /> {/* Hydrate Redux with metadata */}
+      <Head>
+        <title>{meta.title}</title>
+        <meta name="description" content={meta.description} />
+        <meta property="og:image" content={meta.image} />
+      </Head>
       <div>
         <h1>{meta.title}</h1>
         <p>{meta.description}</p>
