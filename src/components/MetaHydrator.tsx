@@ -7,7 +7,6 @@ import { setMeta } from '@/lib/features/metaSlice';
 import { AppDispatch } from '@/lib/store';
 
 interface MetaProps {
-  id: string;
   meta: {
     title: string;
     description: string;
@@ -15,12 +14,12 @@ interface MetaProps {
   };
 }
 
-export default function MetaHydrator({ id, meta }: MetaProps) {
+export default function MetaHydrator({ meta }: MetaProps) {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(setMeta({ id, meta }));
-  }, [id, meta, dispatch]);
+    dispatch(setMeta(meta)); // Store only metadata in Redux
+  }, [meta, dispatch]);
 
-  return null; // No UI rendered
+  return null; // No UI rendered here
 }

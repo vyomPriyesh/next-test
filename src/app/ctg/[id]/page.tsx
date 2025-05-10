@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 }
 
 async function getMetaFromServer(id: string) {
-  // Replace with real API or data fetching
+  // Replace with real API call
   return {
     title: `Category ${id} Title`,
     description: `Description for Category ${id}`,
@@ -26,7 +26,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <MetaHydrator id={params.id} meta={meta} />
+      <MetaHydrator meta={meta} /> {/* Hydrate Redux with metadata */}
       <div>
         <h1>{meta.title}</h1>
         <p>{meta.description}</p>

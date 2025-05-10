@@ -2,18 +2,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface MetaState {
-  [key: string]: { title: string; description: string; image: string };
+  title: string;
+  description: string;
+  image: string;
 }
 
-const initialState: MetaState = {};
+const initialState: MetaState = {
+  title: '',
+  description: '',
+  image: '',
+};
 
 const metaSlice = createSlice({
   name: 'meta',
   initialState,
   reducers: {
-    setMeta: (state, action: PayloadAction<{ id: string; meta: { title: string; description: string; image: string } }>) => {
-      const { id, meta } = action.payload;
-      state[id] = meta; // Store metadata keyed by id
+    setMeta: (state, action: PayloadAction<MetaState>) => {
+      state.title = action.payload.title;
+      state.description = action.payload.description;
+      state.image = action.payload.image;
     },
   },
 });

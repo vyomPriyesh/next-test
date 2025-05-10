@@ -5,12 +5,8 @@ import { useSelector } from 'react-redux';
 import { AppState } from '@/lib/store';
 import Head from 'next/head';
 
-export default function DynamicHead({ id }: { id: string }) {
-  const meta = useSelector((state: AppState) => state.meta[id]);
-
-  if (!meta) {
-    return null; // Wait until metadata is loaded
-  }
+export default function DynamicHead() {
+  const meta = useSelector((state: AppState) => state.meta);
 
   return (
     <Head>
