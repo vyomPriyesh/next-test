@@ -1,14 +1,29 @@
 // app/ctg/page.tsx
+import { useSelector } from 'react-redux';
+import { AppState } from '@/lib/store';
 import MetaHydrator from '@/components/MetaHydrator';
 import Head from 'next/head';
+import { Metadata } from 'next';
 
-// Simulate fetching metadata (replace with real API call if needed)
+// Simulating an API call or logic to set metadata in Redux
 async function getMetaFromServer() {
-  // Replace with actual API call or fetching logic
+  // This is an example of fetching metadata (can be from an API or static data)
   return {
     title: 'Category Title',
     description: 'Description for this category',
     image: 'https://img.youtube.com/vi/sgfe95B8V6w/hqdefault.jpg',
+  };
+}
+
+export async function generateMetadata() {
+  const meta = await getMetaFromServer();
+
+  return {
+    title: meta.title,
+    description: meta.description,
+    openGraph: {
+      images: [meta.image],
+    },
   };
 }
 
