@@ -1,6 +1,6 @@
 import Ctg from "@/components/Ctg";
 import { getMetaFromServer } from "@/lib/getMeta";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 
 type Props = {
   params: { slug: string };
@@ -10,7 +10,7 @@ type Props = {
 // Generate metadata function
 export async function generateMetadata(
   { params }: Props,
-  parent: ResolvingMetadata
+  // parent: ResolvingMetadata
 ): Promise<Metadata> {
   // Optional: You can use the parent metadata if needed
   // const previousImages = (await parent).openGraph?.images || [];
