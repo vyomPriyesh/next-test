@@ -3,9 +3,8 @@ import Ctg from '@/components/Ctg';
 import { Metadata } from 'next';
 
 export async function generateMetadata(
-  props: Promise<{ params: { slug: string } }>
+  { params }: { params: { slug: string } }
 ): Promise<Metadata> {
-  const { params } = await props;
   return await getMetaFromServer(params.slug);
 }
 
