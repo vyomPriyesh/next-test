@@ -1,7 +1,5 @@
 // app/ctg/page.tsx
 import MetaHydrator from '@/components/MetaHydrator';
-import { useSelector } from 'react-redux';
-import { AppState } from '@/lib/store';
 import Head from 'next/head';
 
 // Simulate fetching metadata (replace with real API call if needed)
