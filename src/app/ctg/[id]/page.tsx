@@ -1,9 +1,6 @@
 // app/ctg/page.tsx
-import { useSelector } from 'react-redux';
-import { AppState } from '@/lib/store';
 import MetaHydrator from '@/components/MetaHydrator';
 import Head from 'next/head';
-import { Metadata } from 'next';
 
 // Simulating an API call or logic to set metadata in Redux
 async function getMetaFromServer() {
