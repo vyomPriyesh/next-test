@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@/lib/store';
 
 interface NewsData {
   title: string;
@@ -14,7 +12,6 @@ interface NewsData {
 
 const Ctg = ({ id }: { id: string }) => {
 
-  const dispatch = useDispatch<AppDispatch>();
   const [data, setData] = useState<NewsData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
