@@ -1,18 +1,16 @@
-// /app/ctg/[id]/page.tsx
+// src/app/ctg/[id]/page.tsx
 import { getMetaFromServer } from '@/lib/getMeta';
 import Ctg from '@/components/Ctg';
 import { Metadata } from 'next';
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
-
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: { params: { id: string } }
+): Promise<Metadata> {
   return await getMetaFromServer(params.id);
 }
 
-export default function Page({ params }: PageProps) {
+export default function Page(
+  { params }: { params: { id: string } }
+) {
   return <Ctg id={params.id} />;
 }
