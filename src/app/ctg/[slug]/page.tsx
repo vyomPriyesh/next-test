@@ -1,5 +1,5 @@
-import { getMetaFromServer } from '@/lib/getmeta';
 import Ctg from '@/components/Ctg';
+import { getMetaFromServer } from '@/lib/getMeta';
 import { Metadata } from 'next';
 
 // Type for dynamic route parameters
