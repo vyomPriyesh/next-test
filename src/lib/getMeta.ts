@@ -6,9 +6,9 @@ export async function getMetaFromServer(slug: string) {
   const data = response.data.data;
 
   return {
-    title: data.title,
-    description: data.content?.slice(0, 150),
-    image: data.blog_image?.[0]?.details
+    title: data?.title,
+    description: data?.content?.slice(0, 150),
+    image: data?.blog_image?.[0]?.details
       ? `https://img.youtube.com/vi/${data.blog_image[0].details}/default.jpg`
       : '/default-image.jpg',
   };
