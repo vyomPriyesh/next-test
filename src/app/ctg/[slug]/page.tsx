@@ -1,11 +1,11 @@
-// src/app/ctg/[slug]/page.tsx
 import { getMetaFromServer } from '@/lib/getMeta';
 import Ctg from '@/components/Ctg';
 import { Metadata } from 'next';
 
 export async function generateMetadata(
-  { params }: { params: { slug: string } }
+  props: Promise<{ params: { slug: string } }>
 ): Promise<Metadata> {
+  const { params } = await props;
   return await getMetaFromServer(params.slug);
 }
 
