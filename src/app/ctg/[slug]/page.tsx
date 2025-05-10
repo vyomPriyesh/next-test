@@ -1,22 +1,22 @@
-// src/app/ctg/page.tsx
+// src/app/ctg/[slug]/page.tsx
 import { getMetaFromServer } from '@/lib/getMeta';
-import Ctg from '@/components/Ctg';
 import { Metadata } from 'next';
+import Ctg from '@/components/Ctg';
 
-// ✅ Accept props as a Promise and extract searchParams
+interface Params {
+  slug: string;
+}
+
+// ✅ Correctly await the props object for generateMetadata
 export async function generateMetadata(
-  props: Promise<{ searchParams: { slug: string } }>
+  props: Promise<{ params: Params }>
 ): Promise<Metadata> {
-  const { searchParams } = await props;
-
-  return getMetaFromServer(searchParams?.slug);
+  const { params } = await props;
+  return await getMetaFromServer(params.slug);
 }
 
-// ✅ Page component gets searchParams directly (NOT a Promise)
-export default function Page({
-  searchParams,
-}: {
-  searchParams: { slug: string };
-}) {
-  return <Ctg id={searchParams.slug} />;
+// ✅ Get the `params` directly (not searchParams)
+export default function Page({ params }: { params: Params }) {
+  return <Ctg id={params.slug} />;
 }
+ 

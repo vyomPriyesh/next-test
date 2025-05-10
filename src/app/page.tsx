@@ -12,7 +12,6 @@ export async function generateMetadata(
   return getMetaFromServer(searchParams?.slug);
 }
 
-// ✅ Page component gets searchParams directly (NOT a Promise)
 export default function Page({
   searchParams,
 }: {
