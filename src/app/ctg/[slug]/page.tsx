@@ -1,23 +1,5 @@
-import Ctg from '@/components/Ctg';
-import { getMetaFromServer } from '@/lib/getMeta';
-import { Metadata } from 'next';
-import { type PageProps } from 'next/app';
+import Ctg from "@/components/Ctg";
 
-// Type for dynamic route parameters
-interface Params {
-  slug: string;
-}
-
-interface Props extends PageProps {
-  params: Params;
-}
-
-// Generate metadata
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  return getMetaFromServer(params.slug);
-}
-
-// Page component
-export default function Page({ params }: Props) {
+export default function Page({ params }: { params: { slug: string } }) {
   return <Ctg id={params.slug} />;
 }
