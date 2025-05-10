@@ -1,25 +1,16 @@
 // components/MetaHydrator.tsx
 'use client';
 
+import { setMeta } from '@/lib/features/metaSlice';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setMeta } from '@/lib/features/metaSlice';
-import { AppDispatch } from '@/lib/store';
 
-interface MetaProps {
-  meta: {
-    title: string;
-    description: string;
-    image: string;
-  };
-}
-
-export default function MetaHydrator({ meta }: MetaProps) {
-  const dispatch = useDispatch<AppDispatch>();
+export default function MetaHydrator({ meta }: { meta: any }) {
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setMeta(meta)); // Store metadata in Redux
-  }, [meta, dispatch]);
+    dispatch(setMeta(meta));
+  }, [dispatch, meta]);
 
-  return null; // No UI rendered here
+  return null;
 }

@@ -1,20 +1,10 @@
 // app/ctg/page.tsx
 import MetaHydrator from '@/components/MetaHydrator';
+import { getMetaFromServer } from '@/lib/getMeta';
 import Head from 'next/head';
-
-// Simulating an API call or logic to set metadata in Redux
-async function getMetaFromServer() {
-  // This is an example of fetching metadata (can be from an API or static data)
-  return {
-    title: 'Category Title',
-    description: 'Description for this category',
-    image: 'https://img.youtube.com/vi/sgfe95B8V6w/hqdefault.jpg',
-  };
-}
 
 export async function generateMetadata() {
   const meta = await getMetaFromServer();
-
   return {
     title: meta.title,
     description: meta.description,
@@ -29,7 +19,7 @@ export default async function Page() {
 
   return (
     <>
-      <MetaHydrator meta={meta} /> {/* Hydrate Redux with metadata */}
+      <MetaHydrator meta={meta} /> {/* Hydrate Redux if needed */}
       <Head>
         <title>{meta.title}</title>
         <meta name="description" content={meta.description} />
