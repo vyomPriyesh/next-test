@@ -1,26 +1,24 @@
-import { getMetaFromServer } from '@/lib/getMeta';
-import Ctg from '@/components/Ctg';
-import { Metadata } from 'next';
+import Ctg from "@/components/Ctg";
+import { getMetaFromServer } from "@/lib/getMeta";
+import { Metadata, ResolvingMetadata } from "next";
 
-// Define the expected params type
-interface PageParams {
-  slug: string;
-}
+type Props = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
-// Generate metadata
-export async function generateMetadata({
-  params,
-}: {
-  params: PageParams;
-}): Promise<Metadata> {
+// Generate metadata function
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // Optional: You can use the parent metadata if needed
+  // const previousImages = (await parent).openGraph?.images || [];
+  
   return await getMetaFromServer(params.slug);
 }
 
 // Page component
-export default function Page({
-  params,
-}: {
-  params: PageParams;
-}) {
+export default function Page({ params }: Props) {
   return <Ctg id={params.slug} />;
 }
