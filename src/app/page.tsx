@@ -1,7 +1,4 @@
-import Ctg from "@/components/Ctg";
-
 export default function Home() {
-
 
   return (
     <>
