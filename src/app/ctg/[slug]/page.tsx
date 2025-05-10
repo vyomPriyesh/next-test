@@ -1,28 +1,22 @@
-import { getMetaFromServer } from '@/lib/getMeta';
+import { getMetaFromServer } from '@/lib/getmeta';
 import Ctg from '@/components/Ctg';
 import { Metadata } from 'next';
-import { NextPage } from 'next';
 
-// Define your specific params type
-interface PageProps {
-  params: {
-    slug: string;
-  };
-  searchParams?: {
-    [key: string]: string | string[] | undefined;
-  };
+// Type for dynamic route parameters
+interface Params {
+  slug: string;
 }
 
 // Generate metadata
 export async function generateMetadata({
   params,
-}: PageProps): Promise<Metadata> {
-  return await getMetaFromServer(params.slug);
+}: {
+  params: Params;
+}): Promise<Metadata> {
+  return getMetaFromServer(params.slug);
 }
 
-// Page component with proper typing
-const Page: NextPage<PageProps> = ({ params }) => {
+// Page component
+export default function Page({ params }: { params: Params }) {
   return <Ctg id={params.slug} />;
-};
-
-export default Page;
+}
