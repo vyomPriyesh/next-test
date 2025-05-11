@@ -1,21 +1,33 @@
-// app/news/[id]/page.tsx
 import { Metadata } from 'next'
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+// Define the props for dynamic routes
+type PageProps = {
+  params: {
+    id: string
+  }
+}
+
+// Server-side metadata generation (SEO)
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news_details/1/${params.id}`, {
-    cache: 'no-store', // optional: disable caching if needed
+    cache: 'no-store',
   });
+
   const json = await res.json();
   const title = json?.data?.title || 'Default Title';
 
   return {
     title,
-    description: `Read about ${title}`,
+    description: `Read more about: ${title}`,
   };
 }
 
-export default async function NewsDetailPage({ params }: { params: { id: string } }) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news_details/1/${params.id}`);
+// Server-side rendered page
+export default async function CtgPage({ params }: PageProps) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news_details/1/${params.id}`, {
+    cache: 'no-store',
+  });
+
   const json = await res.json();
   const news = json.data;
 
