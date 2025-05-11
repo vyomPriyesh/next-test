@@ -1,6 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
+interface NewsData {
+  id: number
+  title: string
+  content?: string
+  // add any other fields returned by your API
+}
+
+interface NewsState {
+  data: NewsData | null
+  loading: boolean
+  error: string | null
+}
+
+const initialState: NewsState = {
   data: null,
   loading: false,
   error: null,
