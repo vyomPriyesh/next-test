@@ -16,7 +16,7 @@ export default function CtgPage() {
 
   const newsData = useSelector((state: RootState) => state.news.data)
   const title: string = newsData?.title || 'Default Title'
-  
+
 
   useEffect(() => {
     if (!id) return;
@@ -40,12 +40,19 @@ export default function CtgPage() {
     getData();
   }, [id]);
 
+  useEffect(() => {
+    if (newsData?.title) {
+      document.title = newsData.title
+    }
+  }, [newsData])
+
   if (!id) return <p>Loading…</p>;
 
   return (
     <>
       <Head>
         <title>{title}</title>
+        <meta name="description" content={`News about ${title}`} />
       </Head>
       <div>
         <h1>{title}</h1>
