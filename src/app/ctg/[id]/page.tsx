@@ -16,9 +16,20 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const image = `https://img.youtube.com/vi/${json?.data?.blog_image[0]?.details}/hqdefault.jpg`
 
   return {
-    title,
+     title,
     description: `Read more about: ${title}`,
-    image: image
+    openGraph: {
+      title,
+      description: `Read more about: ${title}`,
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: 'Blog Image',
+        },
+      ],
+    },
   };
 }
 
