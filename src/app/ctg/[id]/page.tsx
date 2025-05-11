@@ -6,7 +6,7 @@ import { Metadata } from 'next'
 export async function generateMetadata({
   params,
 }: {
-  params: { id: number }  // Change `id: string` to `id: number`
+  params: { id: string }
 }): Promise<Metadata> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news_details/1/${params.id}`, {
     cache: 'no-store',
@@ -24,7 +24,7 @@ export async function generateMetadata({
 export default async function CtgPage({
   params,
 }: {
-  params: { id: number }  // Change `id: string` to `id: number`
+  params: { id: string }
 }) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news_details/1/${params.id}`, {
     cache: 'no-store',
