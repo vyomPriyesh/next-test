@@ -28,7 +28,7 @@ export default async function CtgPage(
 
   return (
     <div>
-      <h1>{news.title}</h1>
+      <h1>{news.title}a</h1>
       <p>{news.content}</p>
     </div>
   );
