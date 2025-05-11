@@ -24,7 +24,7 @@ export default function CtgPage() {
       dispatch(setLoading(true));
       try {
         const response = await axios.get(`${apiUrl}news_details/1/${id}`);
-        dispatch(setNewsData(response.data));
+        dispatch(setNewsData(response.data.data));
       } catch (err) {
         if (err instanceof Error) {
           dispatch(setError(err.message))
