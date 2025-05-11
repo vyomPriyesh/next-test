@@ -3,6 +3,7 @@
 import { setError, setLoading, setNewsData } from '@/lib/slices/newsSlice';
 import { RootState } from '@/lib/store';
 import axios from 'axios';
+import Head from 'next/head';
 import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -43,9 +44,12 @@ export default function CtgPage() {
 
   return (
     <>
+      <Head>
+        <title>{title}</title>
+      </Head>
       <div>
         <h1>{title}</h1>
-        <h1>Categorye ID: {id}</h1>
+        <h1>Category ID: {id}</h1>
       </div>
     </>
   );
