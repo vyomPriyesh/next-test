@@ -45,7 +45,7 @@ export default function CtgPage() {
     <>
       <div>
         <h1>{title}</h1>
-        <h1>Category ID: {id}</h1>
+        <h1>Categorye ID: {id}</h1>
       </div>
     </>
   );
