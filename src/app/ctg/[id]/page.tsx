@@ -1,14 +1,12 @@
 // app/ctg/[id]/page.tsx
-
 import { Metadata } from 'next'
 
-// `generateMetadata` will automatically infer the `params` type correctly
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string }
-}): Promise<Metadata> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news_details/1/${params.id}`, {
+type Params = { id: string[] };  // id is an array of strings
+
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { id } = params;
+  const firstId = id[0];  // Access the first value in the array if id is an array
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news_details/1/${firstId}`, {
     cache: 'no-store',
   })
 
@@ -21,22 +19,22 @@ export async function generateMetadata({
   }
 }
 
-// export default async function CtgPage({
-//   params,
-// }: {
-//   params: { id: string }
-// }) {
-//   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news_details/1/${params.id}`, {
-//     cache: 'no-store',
-//   })
 
-//   const json = await res.json()
-//   const news = json.data
+export default async function CtgPage({ params }: { params: Params }) {
+  const { id } = params;
+  const firstId = id[0];
 
-//   return (
-//     <div>
-//       <h1>{news.title}</h1>
-//       <p>{news.content}</p>
-//     </div>
-//   )
-// }
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news_details/1/${firstId}`, {
+    cache: 'no-store',
+  })
+
+  const json = await res.json()
+  const news = json.data
+
+  return (
+    <div>
+      <h1>{news.title}</h1>
+      <p>{news.content}</p>
+    </div>
+  )
+}
