@@ -20,7 +20,11 @@ export default function CtgPage() {
         const response = await axios.get(`${apiUrl}news_details/1/${id}`);
         dispatch(setNewsData(response.data));
       } catch (err) {
-        dispatch(setError(err.message));
+        if (err instanceof Error) {
+          dispatch(setError(err.message))
+        } else {
+          dispatch(setError('An unexpected error occurred.'))
+        }
       } finally {
         dispatch(setLoading(false));
       }
