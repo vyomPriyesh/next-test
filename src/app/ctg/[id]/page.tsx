@@ -1,14 +1,8 @@
 import { Metadata } from 'next'
 
-// Define the props for dynamic routes
-type PageProps = {
-  params: {
-    id: string
-  }
-}
-
-// Server-side metadata generation (SEO)
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: { params: { id: string } }
+): Promise<Metadata> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news_details/1/${params.id}`, {
     cache: 'no-store',
   });
@@ -22,8 +16,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-// Server-side rendered page
-export default async function CtgPage({ params }: PageProps) {
+export default async function CtgPage(
+  { params }: { params: { id: string } }
+) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news_details/1/${params.id}`, {
     cache: 'no-store',
   });
