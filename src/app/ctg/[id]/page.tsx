@@ -3,10 +3,10 @@
 import { Metadata } from 'next'
 
 // Define the type for `params` correctly
-type Params = { id: string };  // `id` is a single string, not an array
+type Params = Promise<{ id: string }> // `id` is a single string, not an array
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const { id } = params;  // Directly access `id`
+   const { id } = await params // Directly access `id`
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news_details/1/${id}`, {
     cache: 'no-store', // Ensure no caching during build
   });
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 }
 
 export default async function CtgPage({ params }: { params: Params }) {
-  const { id } = params;  // Directly access `id`
+  const { id } = await params;  // Directly access `id`
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news_details/1/${id}`, {
     cache: 'no-store', // Ensure no caching during build
