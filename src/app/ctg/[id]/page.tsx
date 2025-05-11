@@ -1,63 +1,28 @@
-'use client'
+// app/news/[id]/page.tsx
+import { Metadata } from 'next'
 
-import { setError, setLoading, setNewsData } from '@/lib/slices/newsSlice';
-import { RootState } from '@/lib/store';
-import axios from 'axios';
-import Head from 'next/head';
-import { useParams } from 'next/navigation';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news_details/1/${params.id}`, {
+    cache: 'no-store', // optional: disable caching if needed
+  });
+  const json = await res.json();
+  const title = json?.data?.title || 'Default Title';
 
-export default function CtgPage() {
+  return {
+    title,
+    description: `Read about ${title}`,
+  };
+}
 
-  const { id } = useParams();
-  const dispatch = useDispatch();
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
-  const newsData = useSelector((state: RootState) => state.news.data)
-  const title: string = newsData?.title || 'Default Title'
-
-
-  useEffect(() => {
-    if (!id) return;
-
-    const getData = async () => {
-      dispatch(setLoading(true));
-      try {
-        const response = await axios.get(`${apiUrl}news_details/1/${id}`);
-        dispatch(setNewsData(response.data.data));
-      } catch (err) {
-        if (err instanceof Error) {
-          dispatch(setError(err.message))
-        } else {
-          dispatch(setError('An unexpected error occurred.'))
-        }
-      } finally {
-        dispatch(setLoading(false));
-      }
-    };
-
-    getData();
-  }, [id]);
-
-  useEffect(() => {
-    if (newsData?.title) {
-      document.title = newsData.title
-    }
-  }, [newsData])
-
-  if (!id) return <p>Loading…</p>;
+export default async function NewsDetailPage({ params }: { params: { id: string } }) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news_details/1/${params.id}`);
+  const json = await res.json();
+  const news = json.data;
 
   return (
-    <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={`News about ${title}`} />
-      </Head>
-      <div>
-        <h1>{title}</h1>
-        <h1>Category ID: {id}</h1>
-      </div>
-    </>
+    <div>
+      <h1>{news.title}</h1>
+      <p>{news.content}</p>
+    </div>
   );
 }
