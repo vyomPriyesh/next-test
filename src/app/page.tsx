@@ -2,7 +2,7 @@
 import { useMyContext } from '@/context/Allcontext'
 import React from 'react'
 
-const page = () => {
+const Page = () => {
 
   const { firstRefresh } = useMyContext();
 
@@ -13,4 +13,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
