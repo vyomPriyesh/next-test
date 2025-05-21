@@ -1,5 +1,5 @@
 "use client"
-import { useMyContext } from '@/context/Allcontext'
+// import { useMyContext } from '@/context/Allcontext'
 import React from 'react'
 
 const Page = () => {
