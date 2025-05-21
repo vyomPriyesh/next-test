@@ -1,6 +1,8 @@
 import { AllProvider } from '@/context/Allcontext'
+import Hero from '@/components/hero'
 import './globals.css'
 import type { ReactNode } from 'react'
+import Navbar from '@/components/navbar'
 
 export const metadata = {
   title: 'My Appw',
@@ -16,6 +18,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body>
         <AllProvider>
+          <Navbar /> {/* ✅ Appears on all pages */}
+          <Hero />   {/* ✅ Appears on all pages */}
           {children}
         </AllProvider>
       </body>

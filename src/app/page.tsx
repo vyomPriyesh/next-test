@@ -8,7 +8,8 @@ const Page = () => {
 
   return (
     <div>
-      <h1>{firstRefresh}</h1>
+      <h2>Home Page</h2>
+      <p>Welcome to the homepage!</p>
     </div>
   )
 }
