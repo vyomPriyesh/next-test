@@ -4,7 +4,7 @@ import React from 'react'
 
 const Page = () => {
 
-  const { firstRefresh } = useMyContext();
+  // const { firstRefresh } = useMyContext();
 
   return (
     <div>
