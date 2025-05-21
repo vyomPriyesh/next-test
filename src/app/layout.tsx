@@ -1,3 +1,4 @@
+import { AllProvider } from '@/context/Allcontext'
 import './globals.css'
 import type { ReactNode } from 'react'
 
@@ -14,7 +15,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body>
+        <AllProvider>
           {children}
+        </AllProvider>
       </body>
     </html>
   )
