@@ -2,7 +2,7 @@
 import { useParams } from 'next/navigation'
 import React from 'react'
 
-const page = () => {
+const Page = () => {
 
     const { id } = useParams()
     return (
@@ -10,4 +10,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page
