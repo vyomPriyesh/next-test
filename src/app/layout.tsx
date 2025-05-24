@@ -3,6 +3,7 @@ import './globals.css'
 import type { ReactNode } from 'react'
 import { AllProvider } from '@/context/Allcontext'
 import ClientLayout from '@/components/ClientLayout '
+import Script from 'next/script'
 
 export const metadata = {
   title: 'My Appw',
@@ -16,6 +17,13 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
+       <head>
+        {/* Other meta tags */}
+        <Script
+          src="https://www.youtube.com/iframe_api"
+          strategy="beforeInteractive" // Ensures it's available early
+        />
+      </head>
       <body>
         <AllProvider>
           <ClientLayout>
