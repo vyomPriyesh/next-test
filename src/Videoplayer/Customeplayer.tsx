@@ -13,6 +13,7 @@ interface MemoizedPlayerProps {
 }
 
 
+
 // Child component only re-renders if videoId changes
 const MemoizedPlayer = React.memo(({ videoId, muted, onEnded }: MemoizedPlayerProps) => {
     
