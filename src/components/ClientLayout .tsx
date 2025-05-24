@@ -4,13 +4,20 @@ import { useEffect } from 'react'
 import { useMyContext } from '@/context/Allcontext'
 import { apiFunctions } from '@/apis/apiFunction'
 import API from '@/apis/Apis'
-import Hero from '@/components/hero'
 import Menu from './menu'
+import First from './first'
 
 type MenuItem = {
   id: number
   name: string
   slug?: string
+}
+
+type LinkItem = {
+  to: string
+  name: string
+  slug?: string
+  title?:string
 }
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
@@ -34,13 +41,13 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     const response = await apiGet(API.cmsMenu)
     if (response.status) {
       const cmsData: MenuItem[] = response.data
-      const dynamicMenu = cmsData.map((list) => ({
+      const dynamicMenu: LinkItem[] = cmsData.map((list) => ({
         to: `our-board/${list.id}`,
         name: list.name,
         slug: list.slug,
       }))
 
-      const staticItem = [
+      const staticItem: LinkItem[] = [
         {
           to: '/cms/reporter-sign-up',
           name: 'Reporter Login',
@@ -51,15 +58,29 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     }
   }
 
+  const allMenu3 = async () => {
+    const response = await apiGet(API.cms)
+    if (response.status) {
+      const cmsExtraData: MenuItem[] = response.data
+      const dynamicMenu: LinkItem[] = cmsExtraData.map((list) => ({
+        to: `cms/${list.id}`,
+        name: list.title,
+        slug: list.slug,
+      }))
+      setMenu2((prev: LinkItem[]) => [...prev, ...dynamicMenu])
+    }
+  }
+
   useEffect(() => {
     allMenu()
     allMenu2()
+    allMenu3()
   }, [])
 
   return (
     <>
       <Menu menu={menu2} />
-      <Hero />
+      <First />
       {children}
     </>
   )
