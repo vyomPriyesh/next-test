@@ -1,8 +1,8 @@
-import { AllProvider } from '@/context/Allcontext'
-import Hero from '@/components/hero'
+// app/layout.tsx (still a Server Component)
 import './globals.css'
 import type { ReactNode } from 'react'
-import Navbar from '@/components/navbar'
+import { AllProvider } from '@/context/Allcontext'
+import ClientLayout from '@/components/ClientLayout '
 
 export const metadata = {
   title: 'My Appw',
@@ -18,9 +18,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body>
         <AllProvider>
-          <Navbar /> {/* ✅ Appears on all pages */}
-          <Hero />   {/* ✅ Appears on all pages */}
-          {children}
+          <ClientLayout>
+            {children}
+          </ClientLayout>
         </AllProvider>
       </body>
     </html>
